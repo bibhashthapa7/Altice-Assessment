@@ -8,22 +8,15 @@ const MovieList = () => {
     const [movies, setMovies] = useState([]);
     const [favoriteMovies, setFavoriteMovies] = useState([]);
     const [timeWindow, setTimeWindow] = useState('week');
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
     const navigate = useNavigate();
-
 
     // Fetch movies from API
     const fetchMovies = useCallback(async () => {
         try {
-            setLoading(true);
-            setError(null);
             const data = await getTrendingMovies(timeWindow);
             setMovies(data.results);
         } catch (error) {
-            setError(error.message);
-        } finally {
-            setLoading(false);
+            console.error('Error fetching movies:', error);
         }
     }, [timeWindow]);
 
@@ -44,24 +37,6 @@ const MovieList = () => {
         fetchMovies();
         fetchFavoriteMovies();
     }, [fetchMovies, fetchFavoriteMovies]);
-
-    // Refresh favorite movies when favorite changes
-    useEffect(() => {
-        const handleFavoriteChange = () => {
-            fetchFavoriteMovies();
-        };
-        window.addEventListener('favorite-change', handleFavoriteChange);
-        return () => {
-            window.removeEventListener('favorite-change', handleFavoriteChange);
-        };
-    }, [fetchFavoriteMovies]);
-
-    if (loading) {
-        return <div>Loading...</div>;
-    }
-    if (error) {
-        return <div>Error: {error}</div>;
-    }
 
     return (
         <div>
