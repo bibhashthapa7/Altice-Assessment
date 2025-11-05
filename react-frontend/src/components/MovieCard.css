@@ -1,0 +1,24 @@
+.movie-card {
+    cursor: pointer;
+    border: 1px solid #ddd;
+    padding: 10px;
+  }
+  
+  .movie-card img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .movie-card h3 {
+    font-size: 14px;
+    margin: 10px 0 5px 0;
+  }
+  
+  .movie-card p {
+    margin: 0;
+  }
+  
+  .star-icon {
+    width: 12px !important;
+    height: 12px !important;
+  }
