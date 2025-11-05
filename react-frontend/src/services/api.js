@@ -23,3 +23,31 @@ export const getMovieDetails = async (movieId) => {
         throw error;
     }
 };
+
+// Get favorites from localStorage
+export const getFavorites = () => {
+    const favorites = localStorage.getItem('favorites');
+    return favorites ? JSON.parse(favorites) : [];
+}
+
+// Add favorite to localStorage
+export const addFavorite = (movieId) => {
+    const favorites = getFavorites();
+    if (!favorites.includes(movieId)) {
+        favorites.push(movieId);
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+    }
+}
+
+// Remove favorite from localStorage
+export const removeFavorite = (movieId) => {
+    const favorites = getFavorites();
+    const updatedFavorites = favorites.filter(id => id !== movieId);
+    localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+}
+
+// Check if movie is a favorite
+export const isFavorite = (movieId) => {
+    const favorites = getFavorites();
+    return favorites.includes(movieId);
+}

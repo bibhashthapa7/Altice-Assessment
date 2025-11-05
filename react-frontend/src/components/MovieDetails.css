@@ -2,15 +2,14 @@
     display: flex;
     gap: 20px;
     margin-top: 20px;
-  }
+}
   
   .details img {
     width: 300px;
-  }
+}
 
   .details p {
     display: flex;
     align-items: center;
     gap: 5px;
-  }
-  
+}
